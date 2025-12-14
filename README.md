@@ -12,14 +12,20 @@
 
 本插件透過 Chrome Extension Manifest V3 標準，動態移除這些限制表頭，讓圖片恢復正常顯示。
 
----
+## 📂 專案檔案結構
+
+確保您的資料夾中包含以下檔案：
+
+- `manifest.json` (插件核心設定檔)
+- `rules.json` (攔截與修改規則)
+- `README.md` (本說明文件)
 
 ## 🚀 安裝說明
 
 由於本插件尚未上架至 Chrome Web Store，請依照以下步驟手動安裝（Developer Mode）：
 
 1. **下載程式碼**
-   - 下載本專案的原始碼，或將檔案放置於資料夾中（例如命名為 `threads-img-fixer`）。
+   - 下載本專案原始碼，確保 `manifest.json` 與 `rules.json` 位於同一資料夾中。
 
 2. **開啟擴充功能管理頁面**
    - 在 Chrome 網址列輸入：`chrome://extensions/`
@@ -34,8 +40,6 @@
 
 5. **重新整理 Threads**
    - 回到 Threads 頁面，按 `Ctrl+F5` (Windows) 或 `Cmd+Shift+R` (Mac) 強制重新整理，圖片應可正常顯示。
-
----
 
 ## 🛠 技術原理 (Interception Mechanism)
 
@@ -59,30 +63,25 @@
 - `.*fbcdn\\.net.*`
 - `.*cdninstagram\\.com.*`
 
----
-
 ## 🔒 安全與隱私聲明 (Security & Privacy)
 
 我們深知使用者對於瀏覽器插件權限的擔憂，在此鄭重聲明：
 
 1. **不收集任何數據**：
-   本插件**沒有**後端伺服器，**不會**收集、儲存或傳送您的瀏覽紀錄、Cookies、帳號資訊或任何個人資料。所有的運作都在您的瀏覽器本機端完成。
+   本插件沒有後端伺服器，**不會**收集、儲存或傳送您的瀏覽紀錄、Cookies、帳號資訊或任何個人資料。所有的運作都在您的瀏覽器本機端完成。
 
 2. **權限使用說明**：
-   - 插件要求 `host_permissions` 是為了能讓 `declarativeNetRequest` API 有權限修改特定網域的回應表頭。
+   - 插件安裝時會提示「讀取及變更您在所有網站上的資料」，這是因為我們使用了 `declarativeNetRequest` 搭配 `<all_urls>` 或廣泛的主機權限來匹配不固定的 CDN 網域。
    - 這是為了修復圖片顯示的必要技術手段，而非為了讀取網頁內容。
 
 3. **開源透明**：
    本專案為完整開源代碼。您隨時可以檢查 `manifest.json` 和 `rules.json` 檔案，確認沒有任何惡意程式碼或追蹤腳本。
-
----
 
 ## 📝 免責聲明
 
 - 本專案與 Meta Platforms, Inc.、Instagram 或 Threads 無任何官方關聯。
 - 本工具僅供技術研究與個人使用，用於修復瀏覽器端的顯示問題。
 
----
+## License
 
-### License
 MIT License
