@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Threads Image Fixer (Force Mode)",
+  "version": "2.0",
+  "description": "暴力修復 Threads 破圖問題",
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
+  }
+}
