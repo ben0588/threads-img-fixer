@@ -2,6 +2,7 @@
 
 **Last Updated / 最後更新日期:** 2025-12-14
 
+**Version / 版本:** 1.1.0 - 已從全域權限改為限定範圍，提升隱私保護
 
 ## 繁體中文版本
 
@@ -21,7 +22,13 @@
 為了正常運作，本擴充功能需要以下特定權限：
 
 * **`declarativeNetRequest` 與 `declarativeNetRequestWithHostAccess`**：這些權限僅用於修改來自 Meta CDN（如 `fbcdn.net`、`cdninstagram.com`）之圖片資源的特定 HTTP 回應表頭（主要是 `Cross-Origin-Resource-Policy`）。這是解決圖片載入錯誤的必要技術手段。
-* **主機權限（Host Permissions，如 `<all_urls>` 或特定網域）**：由於 Threads 使用的圖片 CDN 網域是動態且多樣的，本擴充功能需要廣泛的主機權限來匹配這些網址模式並套用修復規則。我們不會利用此權限讀取或修改網頁內容。
+* **主機權限（Host Permissions - 明確範圍限制）**：
+  * **✨ v1.1.0 更新**：我們已移除 `<all_urls>` 全域權限，改為僅要求存取以下明確網域：
+    * `threads.net`、`threads.com` (主要目標網站)
+    * `instagram.com`、`facebook.com` (Meta 相關平台)
+    * `fbcdn.net`、`cdninstagram.com` 及其子網域 (圖片 CDN)
+  * 本擴充功能**僅在您瀏覽上述特定網站時運作**，不會影響其他網站。
+  * 我們不會利用此權限讀取或修改網頁內容，僅修改圖片請求的表頭。
 
 ### 4. 第三方服務
 本擴充功能不使用任何第三方分析工具（如 Google Analytics）或廣告聯播網。
@@ -41,6 +48,8 @@
 ### 1. Introduction
 "Threads Image Fixer (CORP Patch)" (hereinafter referred to as "the Extension") is a browser extension developed to fix broken image rendering issues on the Threads website caused by Cross-Origin Resource Policy (CORP) restrictions. We respect your privacy and are committed to protecting it.
 
+**✨ v1.1.0 Update:** We have significantly improved privacy protection by switching from global permissions to explicitly scoped host permissions.
+
 ### 2. Data Collection and Usage
 **We do not collect, store, or transmit any of your personal data.**
 
@@ -54,7 +63,13 @@ All operations performed by the Extension occur entirely locally within your bro
 To function correctly, the Extension requires specific permissions:
 
 * **`declarativeNetRequest` & `declarativeNetRequestWithHostAccess`:** These permissions are used solely to modify specific HTTP response headers (specifically `Cross-Origin-Resource-Policy`) for image resources originating from Meta's CDNs (e.g., `fbcdn.net`, `cdninstagram.com`). This is a technical necessity to resolve the image loading errors.
-* **Host Permissions (`<all_urls>` or specific domains):** Because the CDN domains used by Threads are dynamic and varied, the Extension requires broad host permissions to match these URL patterns and apply the necessary header fixes. We do not use these permissions to read or modify web page content.
+* **Host Permissions (Explicitly Scoped - v1.1.0+):**
+  * **✨ Privacy Improvement:** We have removed the `<all_urls>` global permission and now only request access to specific domains:
+    * `threads.net`, `threads.com` (Primary target sites)
+    * `instagram.com`, `facebook.com` (Related Meta platforms)
+    * `fbcdn.net`, `cdninstagram.com` and their subdomains (Image CDNs)
+  * The Extension **only operates when you visit these specific websites** and does not affect any other sites.
+  * We do not use these permissions to read or modify web page content, only to modify image request headers.
 
 ### 4. Third-Party Services
 The Extension does not use any third-party analytics tools (e.g., Google Analytics) or advertising networks.
