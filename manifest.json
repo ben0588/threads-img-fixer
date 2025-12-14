@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Threads Image Fixer (Force Mode)",
-  "version": "1.0.0",
-  "description": "暴力修復 Threads 破圖問題",
+  "name": "Threads Image Fixer",
+  "version": "1.1.0",
+  "description": "自動修復 Threads 與 Instagram 圖片無法顯示的問題 (Fix broken images on Threads)。",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -13,7 +13,13 @@
     "declarativeNetRequestWithHostAccess"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "*://*.threads.net/*",
+    "*://*.threads.com/*", 
+    "*://*.instagram.com/*",
+    "*://*.facebook.com/*",
+    "*://*.fbcdn.net/*",
+    "*://*.fna.fbcdn.net/*",
+    "*://*.cdninstagram.com/*"
   ],
   "declarative_net_request": {
     "rule_resources": [

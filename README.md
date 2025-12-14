@@ -2,6 +2,8 @@
 
 這是一個開源的 Chrome 擴充功能，專門用於解決 **Threads (threads.net)** 網頁版瀏覽時，圖片因 `Cross-Origin-Resource-Policy (CORP)` 限制而導致的破圖問題 (`net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin`)。
 
+> **✨ v1.1.0 新版更新**：為了提升安全性與隱私保護，本插件現在**僅在 Threads 網站**上運作，不再全域攔截請求。只有當您正在瀏覽 `threads.net` 或相關 Meta 平台時，插件才會修改圖片 CDN 的表頭。
+
 ## ⚠️ 問題背景
 
 當你在瀏覽器上瀏覽 Threads 時，Meta 的圖片 CDN (如 `fbcdn.net`, `cdninstagram.com`) 有時會回傳嚴格的安全性表頭：
@@ -52,6 +54,13 @@
 ### 1. 宣告式網路請求 (DNR)
 與舊版 V2 的 `webRequest` 不同，本插件**不會**透過 JavaScript 讀取或監聽每一個封包的內容（這樣太慢且不安全）。我們只是向瀏覽器註冊一份 `rules.json` 規則清單，由瀏覽器底層直接執行。
 
+**🔒 作用範圍限制 (v1.1.0+)**：插件使用 `host_permissions` 明確限制只在特定網域運作，包括：
+- `threads.net` (主要目標)
+- `instagram.com`, `facebook.com` (Meta 相關平台)
+- `fbcdn.net`, `cdninstagram.com` (圖片 CDN)
+
+這表示插件**僅在您瀏覽這些網站時**才會修改請求表頭，其他網站完全不受影響。
+
 ### 2. Header 修改邏輯
 當瀏覽器發出的請求網址符合 Meta CDN 的特徵（正則表達式匹配）時，瀏覽器會自動執行以下動作：
 
@@ -74,12 +83,18 @@
 1. **不收集任何數據**：
    本插件沒有後端伺服器，**不會**收集、儲存或傳送您的瀏覽紀錄、Cookies、帳號資訊或任何個人資料。所有的運作都在您的瀏覽器本機端完成。
 
-2. **權限使用說明**：
-   - 插件安裝時會提示「讀取及變更您在所有網站上的資料」，這是因為我們使用了 `declarativeNetRequest` 搭配 `<all_urls>` 或廣泛的主機權限來匹配不固定的 CDN 網域。
-   - 這是為了修復圖片顯示的必要技術手段，而非為了讀取網頁內容。
+2. **權限使用說明 (v1.1.0 更新)**：
+   - **明確範圍限制**：從 v1.1.0 版本開始，插件僅要求存取 Threads、Instagram、Facebook 及其 CDN 網域的權限 (`host_permissions`)，不再使用全域 `<all_urls>`。
+   - **更少的權限範圍**：插件只在您瀏覽特定的 Meta 相關網站時才會運作，大幅減少潛在的安全疑慮。
+   - **技術必要性**：我們需要 `declarativeNetRequestWithHostAccess` 權限來修改圖片 CDN 的回應表頭，這是修復破圖問題的唯一方式。
 
 3. **開源透明**：
    本專案為完整開源代碼。您隨時可以檢查 `manifest.json` 和 `rules.json` 檔案，確認沒有任何惡意程式碼或追蹤腳本。
+
+### 🆕 v1.1.0 版本變更
+- **從全域請求改為限定範圍**：移除 `<all_urls>` 權限，改用明確的 `host_permissions`
+- **提升隱私保護**：插件僅在必要的網站上運作
+- **降低權限提示警告**：安裝時的權限警告更加精確
 
 ## 📝 免責聲明
 
