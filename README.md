@@ -19,13 +19,17 @@
 - `manifest.json` (插件核心設定檔)
 - `rules.json` (攔截與修改規則)
 - `README.md` (本說明文件)
+- `icons/` (插件圖示資料夾)
 
 ## 🚀 安裝說明
 
 由於本插件尚未上架至 Chrome Web Store，請依照以下步驟手動安裝（Developer Mode）：
 
-1. **下載程式碼**
-   - 下載本專案原始碼，確保 `manifest.json` 與 `rules.json` 位於同一資料夾中。
+1. **下載與解壓縮**
+   - 前往本頁面右側的 **Releases** 區塊。
+   - 下載最新的 `.zip` 壓縮檔。
+   - **請務必解壓縮檔案**：將壓縮檔解壓至您習慣的位置（例如桌面）。
+   - *檢查*：確認解壓後的資料夾內含有 `icons/` 資料夾與 `manifest.json` 檔案。
 
 2. **開啟擴充功能管理頁面**
    - 在 Chrome 網址列輸入：`chrome://extensions/`
